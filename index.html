@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lanchonete Mãe e Filha | Cardápio Online</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#fff8ef;color:#24150d}
+header{background:#24150d;color:white;text-align:center;padding:25px 15px;border-bottom:6px solid #d96b19}
+h1{margin:0;color:#ff8b2b;font-size:clamp(28px,6vw,48px)} header p{font-weight:bold}
+main{max-width:1050px;margin:auto;padding:18px}.hero{background:#fff;padding:10px;border-radius:20px;box-shadow:0 5px 20px #0002}
+.hero img{width:100%;display:block;border-radius:15px}.intro{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.pill{background:white;border:1px solid #ead6c2;border-radius:30px;padding:10px 14px;font-weight:bold}
+h2{text-align:center;color:#d96b19}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:white;padding:20px;border-radius:18px;box-shadow:0 5px 18px #0001}.card h3{color:#d96b19;font-size:22px}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.size{padding:11px 5px;border-radius:10px;border:1px solid #dfc7ad;background:#fffaf5;font-weight:bold;cursor:pointer}
+.size.active,.size:hover{background:#d96b19;color:white}.order{margin-top:25px;background:#24150d;color:white;padding:22px;border-radius:20px}
+.order h2{color:#ff9b3f}label{display:block;margin-top:10px;font-weight:bold}input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;font-size:16px;box-sizing:border-box}
+textarea{min-height:85px}.whats{margin-top:16px;width:100%;padding:15px;border:0;border-radius:12px;background:#25D366;color:white;font-size:18px;font-weight:bold;cursor:pointer}
+.notice{margin:18px 0;padding:14px;background:#fff0da;border-left:5px solid #d96b19;border-radius:8px}
+footer{margin-top:25px;background:#24150d;color:white;text-align:center;padding:22px;border-top:5px solid #d96b19}a{color:#ff9b3f}
+</style>
+</head>
+<body>
+<header><h1>LANCHONETE MÃE E FILHA</h1><p>Cardápio Online • Final de Semana • Sábado e Domingo</p></header>
+<main>
+<section class="hero"><img src="imagens/cardapio-final-semana.jpeg" alt="Cardápio final de semana"></section>
+<div class="intro"><div class="pill">📍 Balneário de Ponta da Fruta</div><div class="pill">🛵 Entrega e retirada</div><div class="pill">📲 Pedidos pelo WhatsApp</div></div>
+<div class="notice"><b>Como pedir:</b> escolha o prato e o tamanho, preencha seus dados e clique em <b>Enviar pedido pelo WhatsApp</b>.</div>
+<h2>🍽️ Cardápio</h2>
+<section class="grid">
+<article class="card"><h3>Feijão Tropeiro Completo</h3><p>Feijão, couve, torresmo crocante, bacon, linguiça e farofa + arroz e vinagrete.</p><div class="sizes">
+<button class="size" data-item="Feijão Tropeiro Completo" data-size="Individual">Individual</button><button class="size" data-item="Feijão Tropeiro Completo" data-size="Para 2">Para 2</button><button class="size" data-item="Feijão Tropeiro Completo" data-size="Família">Família</button></div></article>
+<article class="card"><h3>Salpicão Cremoso da Casa</h3><p>Frango cremoso, milho, cenoura, batata palha + arroz.</p><div class="sizes">
+<button class="size" data-item="Salpicão Cremoso da Casa" data-size="Individual">Individual</button><button class="size" data-item="Salpicão Cremoso da Casa" data-size="Para 2">Para 2</button><button class="size" data-item="Salpicão Cremoso da Casa" data-size="Família">Família</button></div></article>
+<article class="card"><h3>Mix de Carnes na Chapa</h3><p>Picanha fatiada + linguiça + frango + acompanha tropeiro, salpicão, arroz e farofa.</p><div class="sizes">
+<button class="size" data-item="Mix de Carnes na Chapa" data-size="Individual">Individual</button><button class="size" data-item="Mix de Carnes na Chapa" data-size="Para 2">Para 2</button><button class="size" data-item="Mix de Carnes na Chapa" data-size="Família">Família</button></div></article>
+</section>
+<section class="order"><h2>📲 Fazer pedido pelo WhatsApp</h2>
+<label>Seu nome</label><input id="cliente" placeholder="Digite seu nome">
+<label>Entrega ou retirada?</label><select id="tipo"><option>Entrega</option><option>Retirada</option></select>
+<label>Endereço / referência</label><input id="endereco" placeholder="Endereço para entrega ou 'Retirada'">
+<label>Pagamento</label><select id="pagamento"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>A combinar</option></select>
+<label>Observações</label><textarea id="obs" placeholder="Ex.: sem cebola, troco para..."></textarea>
+<button class="whats" onclick="pedido()">Enviar pedido pelo WhatsApp</button>
+<p style="text-align:center">WhatsApp: (28) 99964-4204 • (27) 99511-6811</p></section>
+</main>
+<footer><b>Lanchonete Mãe e Filha</b><br>Balneário de Ponta da Fruta, Vila Velha • Avenida Marmelo 302<br><a href="https://wa.me/5528999644204">Chamar no WhatsApp</a></footer>
+<script>
+let item="",tam="";
+document.querySelectorAll(".size").forEach(b=>b.onclick=()=>{document.querySelectorAll(".size").forEach(x=>x.classList.remove("active"));b.classList.add("active");item=b.dataset.item;tam=b.dataset.size;document.querySelector(".order").scrollIntoView({behavior:"smooth"});});
+function pedido(){
+ if(!item){alert("Escolha primeiro um prato e um tamanho.");return}
+ let m=`Olá! Quero fazer um pedido na Lanchonete Mãe e Filha.\n\n🍽️ Pedido: ${item}\n📦 Tamanho: ${tam}\n👤 Nome: ${document.getElementById("cliente").value||"Cliente"}\n🛵 Tipo: ${document.getElementById("tipo").value}\n📍 Endereço/referência: ${document.getElementById("endereco").value||"Não informado"}\n💳 Pagamento: ${document.getElementById("pagamento").value}\n📝 Observações: ${document.getElementById("obs").value||"Nenhuma"}\n\nAguardo a confirmação e o valor total.`;
+ window.open("https://wa.me/5528999644204?text="+encodeURIComponent(m),"_blank");
+}
+</script>
+</body></html>
